@@ -3,6 +3,7 @@
 import ProductModel from "../models/ProductModel.js";
 import dotenv from 'dotenv'
 import mongoose from "mongoose";
+import CategoriesModel from "../models/CategoriesModel.js";
 
 
 dotenv.config();
@@ -42,6 +43,15 @@ export const initProducts = async (req,res) => {
             image: image,
             qty: qty
         });
+
+        const category = await CategoriesModel.findOne({id : category_id})
+        if(category) {
+            console.log("FOUND CATEGORY");
+            category.products.push(result);
+            const updated = await CategoriesModel.findOneAndUpdate({id: category_id}, category, {new : true});
+        }
+
+
 
         res.status(201).json(result);
 
