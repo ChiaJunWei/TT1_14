@@ -2,9 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import postRoutes from './routes/posts.js';
 
 import userRoutes from './routes/UserRoutes.js'
+import productRoutes from './routes/ProductRoutes.js'
 import populateDB from './populateDB.js';
 
 
@@ -13,13 +13,13 @@ const app = express();
 
 const CONNECTION_URL = 'mongodb+srv://team14:team14@cluster0.dowl8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 
-app.use('/posts', postRoutes);
 app.use(express.json({extended: true}));
 app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 //add routes after cors(),
 app.use('/user', userRoutes);
+app.use('/products', productRoutes);
 
 const PORT = process.env.PORT || 5000
 
