@@ -24,7 +24,7 @@ export const createCategory = async (req,res) => {
 
 export const initCategories = async (req,res) => {
     console.log("REQ:", req);
-    const{ name, description, image } = req;
+    const{ name, description, image, id } = req;
     
     try {
         const catExists = await CategoriesModel.findOne({ name });
@@ -37,6 +37,7 @@ export const initCategories = async (req,res) => {
             name: name,
             description : description,
             image : image,
+            id : id,
         });
         return true;
     } catch (error) {
