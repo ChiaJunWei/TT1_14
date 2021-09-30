@@ -26,6 +26,15 @@ const App = () => {
 
     // setProducts(data.products);
 
+  //   axios.get('http://localhost:5000/products/getallproducts')
+  //   .then((res) => {
+  //     console.log("RESPONSE RECEIVED: ", res);
+  //     setProducts(res)
+  //   })
+  //   .catch((err) => {
+  //     console.log("AXIOS ERROR: ", err);
+  // })
+
 
 
     var allproductsdata = productsdata;

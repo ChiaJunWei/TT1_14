@@ -18,3 +18,6 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 export const getProducts = () => API.get('/products/getallproducts');
+export const handleAddToCart = () => API.get('/createorderitem');
+export const handleUpdateCartQty = () => API.get('/getorderitemss');
+export const handleRemoveFromCart = () => API.get('/deleteorderitem');
