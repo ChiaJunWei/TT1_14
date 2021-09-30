@@ -22,9 +22,7 @@ export const signUp = (formData, router) => async (dispatch) => {
         const { data } = await api.signUp(formData);
         console.log("DATA: " + JSON.stringify(data));
         dispatch({type : AUTH, data});
-
         router.push('/');
-        return true;
     } catch (error) {
         console.log(error);
         const data = error?.response?.data?.message

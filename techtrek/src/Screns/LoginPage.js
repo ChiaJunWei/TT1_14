@@ -88,7 +88,7 @@ export default function LoginPage() {
 
   React.useEffect(() => {
     if(token) {
-      //history.push("/");
+      history.push("/");
     }
   },[token])
 
