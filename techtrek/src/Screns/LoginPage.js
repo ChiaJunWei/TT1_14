@@ -103,6 +103,10 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(isRegister) {
+      if(form.password != form.confirmPassword) {
+        alert("Password does not match");
+        return;
+      }
       dispatch(signUp(form, history));
     } else {
       dispatch(signIn(form,history));
@@ -165,9 +169,9 @@ export default function LoginPage() {
             <Box mt={5}>
               <Copyright />
             </Box>
-            {<Button onClick ={handleLogout}>
+            {/*<Button onClick ={handleLogout}>
                 LOGOUT
-        </Button>}
+          </Button>*/}
           </form>
         </div>
 

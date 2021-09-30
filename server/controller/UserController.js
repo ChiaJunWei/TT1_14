@@ -46,7 +46,7 @@ export const signup = async (req,res) => {
         const oldUser = await UserModel.findOne({ username });
         if(oldUser) {
             console.log("username already exists");
-            return res.status(200).send( {message: `${username} already exists.`});
+            return res.status(400).send( {message: `${username} already exists.`});
         }
 
         const hPassword = await bcrypt.hash(password,12);
