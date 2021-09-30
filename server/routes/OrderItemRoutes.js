@@ -11,4 +11,9 @@ router.get('/getOrderItems',auth, getOrderItems);
 router.post('/deleteOrderItem',auth, deleteOrderItem);
 
 
+// router.post('/createOrderItem', createOrderItem);
+// router.post('/updateOrderItem', updateOrderItem);
+// router.get('/getOrderItems', getOrderItems);
+// router.post('/deleteOrderItem',deleteOrderItem);
+
 export default router;

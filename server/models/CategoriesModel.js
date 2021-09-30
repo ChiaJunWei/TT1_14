@@ -6,7 +6,7 @@ const categoriesSchema = mongoose.Schema({
   description: { type: String },
   Image: { type: String},
   products : {type: [], default: []},
-  id : {type: Number, required : true},
+  id : {type: Number},
 });
 
 export default mongoose.model("Category", categoriesSchema);
