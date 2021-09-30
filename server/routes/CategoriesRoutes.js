@@ -5,7 +5,6 @@ import { signin, signup,} from '../controller/UserController.js';
 
 const router = express.Router();
 
-router.post('/signin', signin);
-router.post('/signup', signup);
+router.post('/categories', createCategory);
 
 export default router;
