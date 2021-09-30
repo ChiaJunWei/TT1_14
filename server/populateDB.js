@@ -19,17 +19,7 @@ export default async function populateDB() {
         }
     }
     console.log("POPULATED USERS");
-    for(var i = 0; i < products.length; i++){
-        try {
-            const{ data } = await initProducts(products[i]);
-            console.log("DATA: " + JSON.stringify(data));
-        } catch (error){
-            console.log("ERROR: ", error);
-        }
-    }
 
-    console.log("POPULATED PRODUCTS");
-    
     for(var i = 0; i < categories.length; i++) {
         console.log(categories[i]);
         try {
@@ -41,5 +31,19 @@ export default async function populateDB() {
         
     }
     console.log("POPULATED CATEGORIES");
+
+    
+    for(var i = 0; i < products.length; i++){
+        try {
+            const{ data } = await initProducts(products[i]);
+            console.log("DATA: " + JSON.stringify(data));
+        } catch (error){
+            console.log("ERROR: ", error);
+        }
+    }
+
+    console.log("POPULATED PRODUCTS");
+    
+    
     
 }
