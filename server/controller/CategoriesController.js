@@ -1,5 +1,15 @@
 import CategoriesModel from "../models/CategoriesModel.js";
 
+export const getCategories = async (req,res) => {
+    try {
+        const fetchCategories = await CategoriesModel.find();
+
+        res.status(200).json(fetchCategories)
+    } catch(error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export const createCategory = async (req,res) => {
     const{ name, description, image } = req.body;
     
