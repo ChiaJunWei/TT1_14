@@ -31,10 +31,10 @@ const App = () => {
     console.log(item)
     
     var postData = {
-      product_id: "productId",
-      order_id: "1",
-      product_qty:"1",
-      price:'1'
+      product_id: 1,
+      order_id: 1,
+      product_qty:1,
+      price:1
     };
     let axiosConfig = {
       headers: {
@@ -49,7 +49,7 @@ const App = () => {
     })
     .catch((err) => {
       console.log("AXIOS ERROR: ", err);
-})
+  })
 
     setCart(item.cart);
   };
