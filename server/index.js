@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/UserRoutes.js'
 import productRoutes from './routes/ProductRoutes.js'
+import orderRoutes from './routes/OrderRoutes.js'
 import populateDB from './populateDB.js';
 
 
@@ -20,6 +21,7 @@ app.use(cors());
 //add routes after cors(),
 app.use('/user', userRoutes);
 app.use('/products', productRoutes);
+app.use('/order', orderRoutes);
 
 const PORT = process.env.PORT || 5000
 
