@@ -8,6 +8,7 @@ import productsdata from './Dataset/products.json'
 import { Container } from '@material-ui/core';
 import LoginPage from './Screns/LoginPage';
 import HomePage from './Screns/HomePage';
+import { getProducts } from './API';
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -17,10 +18,11 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const fetchProducts = async () => {
-    var allproductsdata = productsdata;
-    console.log (allproductsdata)    
+    //var allproductsdata = productsdata;
+    const {data} = await getProducts();
+    console.log(data.products)    
 
-    setProducts(allproductsdata);
+    setProducts(data.products);
   };
 
   const fetchCart = async () => {
