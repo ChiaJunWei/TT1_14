@@ -38,8 +38,10 @@ export const signin = async (req,res) => {
 }
 
 export const signup = async (req,res) => {
-    const{ email, password, firstName, lastName } = req.body;
-
+    
+    console.log("REQ:", req);
+    const{ username, password, first_name, last_name, postal_code, gender, created_at } = req.body;
+    
     try {
         const oldUser = await UserModel.findOne({ email });
         if(oldUser) {
@@ -48,9 +50,50 @@ export const signup = async (req,res) => {
         }
 
         const hPassword = await bcrypt.hash(password,12);
-        const result = await UserModel.create({email, password: hPassword, name : `${firstName} ${lastName}`});
+        const result = await UserModel.create({
+            username : username, 
+            password: hPassword, 
+            name : `${first_name} ${last_name}`,
+            first_name : first_name,
+            last_name : last_name,
+            postal_code: postal_code,
+            gender : gender ? gender : null,
+            created_at : created_at ? created_at : new Date(),
+        });
 
         const token = jwt.sign({email: result.email, id: result._id}, secret, {expiresIn: "3h"});
+
+        res.status(201).json({ result, token});
+    } catch (error) {
+        res.status(500).send({ message: "Unknown error occurred. Please try again."});
+        console.log(error);
+    }
+}
+
+export const initUsers = async (req,res) => {
+    
+    const{ username, password, first_name, last_name, postal_code, gender, created_at } = req;
+    
+    try {
+        const oldUser = await UserModel.findOne({ username });
+        if(oldUser) {
+            console.log("email already exists");
+            return res.status(200).send( {message: `${username} already exists.`});
+        }
+
+        const hPassword = await bcrypt.hash(password,12);
+        const result = await UserModel.create({
+            username : username, 
+            password: hPassword, 
+            name : `${first_name} ${last_name}`,
+            first_name : first_name,
+            last_name : last_name,
+            postal_code: postal_code,
+            gender : gender ? gender : null,
+            created_at : created_at ? created_at : new Date(),
+        });
+
+        const token = jwt.sign({email: result.username, id: result._id}, secret, {expiresIn: "3h"});
 
         res.status(201).json({ result, token});
     } catch (error) {
