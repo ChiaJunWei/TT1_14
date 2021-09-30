@@ -1,4 +1,4 @@
-import { AUTH, ERROR, LOADING, UPDATE_USER } from "./actionTypes.js";
+import { AUTH, ERROR } from "./actionTypes.js";
 
 import * as api from '../API/index.js';
 
@@ -30,32 +30,5 @@ export const signUp = (formData, router) => async (dispatch) => {
         const data = error?.response?.data?.message
         console.log("ERROR MSG: " + data != null ? data : error);
         dispatch({type : ERROR, data})
-    }
-}
-
-export const newTransaction = (formData) => async (dispatch) => {
-    try {
-        console.log("FORMDATA:", formData);       
-        const { data } = await api.createTransaction(formData);
-        dispatch({type : UPDATE_USER, data});
-    } catch (error) {
-        const data = error?.response?.data?.message
-        console.log("ERROR MSG: " + data ? data : error);
-        dispatch({type : ERROR, data})
-    }
-}
-
-export const newCard = (formData) => async (dispatch) => {
-    console.log("NEW CARD ACTION");
-    try {
-        console.log("FORMDATA:", formData);       
-        const { data } = await api.createCard(formData);
-        console.log("NEWCARD DATA: " + data);
-        dispatch({type : UPDATE_USER, data});
-    } catch (error) {
-        const data = error?.response?.data?.message
-        console.log("ERROR MSG: " + data ? data : error);
-        dispatch({type : ERROR, data})
-
     }
 }
