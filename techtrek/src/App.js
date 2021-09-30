@@ -63,6 +63,8 @@ const App = () => {
   const handleUpdateCartQty = async (lineItemId, quantity) => {
     const response = await commerce.cart.update(lineItemId, { quantity });
 
+    //http://localhost:5000/orderitem/updateorderitem
+
     setCart(response.cart);
   };
 
@@ -80,21 +82,12 @@ const App = () => {
 
   const refreshCart = async () => {
     const newCart = await commerce.cart.refresh();
+    // http://localhost:5000/orderitem/getorderitems
 
     setCart(newCart);
   };
 
-  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
-    try {
-      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
-
-      setOrder(incomingOrder);
-
-      refreshCart();
-    } catch (error) {
-      setErrorMessage(error.data.error.message);
-    }
-  };
+  
 
   useEffect(() => {
     fetchProducts();
@@ -114,9 +107,6 @@ const App = () => {
           </Route>
           <Route exact path="/cart">
             <Cart cart={cart} onUpdateCartQty={handleUpdateCartQty} onRemoveFromCart={handleRemoveFromCart} onEmptyCart={handleEmptyCart} />
-          </Route>
-          <Route path="/checkout" exact>
-            <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
           </Route>
           <Route path = "/login" exact component = {LoginPage}/>
         </Switch>
