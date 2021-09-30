@@ -1,12 +1,15 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Container, Typography, Button, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import CartItem from './CartItem/CartItem';
 import useStyles from './styles';
+import axios from 'axios'
+
 
 const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   const classes = useStyles();
+  const [order,setorderitem]= useState({})
 
   const handleEmptyCart = () => onEmptyCart();
 
@@ -17,6 +20,22 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
   );
 
   if (!cart.line_items) return 'Loading';
+
+  // useEffect(()=> {
+  //   axios.get('  http://localhost:5000/orderitem/getorderitems')
+  //   .then((res) => {
+  //     console.log("RESPONSE RECEIVED: ", res);
+  //     setorderitem= res.result
+  //   })
+  //   .catch((err) => {
+  //     console.log("AXIOS ERROR: ", err);
+    
+  // },[])})
+
+
+
+
+
 
   const renderCart = () => (
     <>

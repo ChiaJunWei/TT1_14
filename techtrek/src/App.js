@@ -29,6 +29,7 @@ const App = () => {
   const handleAddToCart = async (productId, quantity) => {
     const item = await commerce.cart.add(productId, quantity);
     console.log(item)
+    
     var postData = {
       product_id: "productId",
       order_id: "1",
