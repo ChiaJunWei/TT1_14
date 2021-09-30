@@ -13,7 +13,7 @@ export const getallproducts = async (req,res) => {
 
     try {
 
-        const products = await ProductModel.findAll;
+        const products = await ProductModel.find();
         console.log('success'); 
         return res.status(200).json({products});
 
