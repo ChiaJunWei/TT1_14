@@ -17,10 +17,10 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const fetchProducts = async () => {
-    var productsdata = productsdata;
-    console.log (productsdata)    
+    var allproductsdata = productsdata;
+    console.log (allproductsdata)    
 
-    setProducts(productsdata);
+    setProducts(allproductsdata);
   };
 
   const fetchCart = async () => {
