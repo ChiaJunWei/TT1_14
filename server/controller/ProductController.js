@@ -2,7 +2,6 @@
 
 import ProductModel from "../models/ProductModel.js";
 import dotenv from 'dotenv'
-import mongoose from "mongoose";
 import CategoriesModel from "../models/CategoriesModel.js";
 
 
