@@ -13,11 +13,10 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const fetchProducts = async () => {
-    const { data } = await commerce.products.list();
-    console.log(data);
-    var as = JSON.parse(productsdata);
+    var productsdata = productsdata;
+    console.log (productsdata)    
 
-    setProducts(as);
+    setProducts(productsdata);
   };
 
   const fetchCart = async () => {
