@@ -7,6 +7,7 @@ import userRoutes from './routes/UserRoutes.js'
 import productRoutes from './routes/ProductRoutes.js'
 import categoryRoutes from './routes/CategoriesRoutes.js'
 import orderRoutes from './routes/OrderRoutes.js'
+import orderItemRoutes from './routes/OrderItemRoutes.js'
 import populateDB from './populateDB.js';
 
 
@@ -24,6 +25,8 @@ app.use('/user', userRoutes);
 app.use('/products', productRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/order', orderRoutes);
+app.use('/orderitem', orderItemRoutes);
+
 
 const PORT = process.env.PORT || 5000
 
