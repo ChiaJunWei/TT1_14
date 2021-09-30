@@ -1,0 +1,11 @@
+import express from 'express';
+import auth from '../middleware/auth.js';
+import { signin, signup, createTransaction , createCard} from '../controller/UserController.js';
+
+
+const router = express.Router();
+
+router.post('/signin', signin);
+router.post('/signup', signup);
+
+export default router;
