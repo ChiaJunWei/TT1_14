@@ -10,12 +10,12 @@ dotenv.config();
 
 
 export const getallproducts = async (req,res) => {
-    // const{ email, password, firstName, lastName } = req.body;
 
     try {
 
         const products = await ProductModel.findAll;
-        res.status(200).json(products);
+        console.log('success'); 
+        return res.status(200).json({products});
 
     } catch (error) {
         res.status(500).send({ message: "Unknown error occurred. Please try again."});
@@ -23,19 +23,31 @@ export const getallproducts = async (req,res) => {
     }
 }
 
-export const createproduct = async (req,res) => {
-     const{ title, price, description, category_id, image, qty } = req.body;
+
+export const initProducts = async (req,res) => {
+    
+    const{ title, price, description, category_id, image, qty } = req;
+    
     try {
+        const oldProduct = await ProductModel.findOne({ title });
+        if(oldProduct) {
+            console.log("product already exists");
+            return res.status(200).send( {message: `${title} already exists.`});
+        }
+        const result = await ProductModel.create({
+            title : title, 
+            price: price, 
+            description: description,
+            category_id: category_id,
+            image: image,
+            qty: qty
+        });
 
-        // await UserModel.create({email, password: hPassword, name : `${firstName} ${lastName}`});
-        // res.status(200).json(products);
+        res.status(201).json(result);
 
     } catch (error) {
         res.status(500).send({ message: "Unknown error occurred. Please try again."});
         console.log(error);
     }
 }
-
-
-
 
