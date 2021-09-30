@@ -12,10 +12,10 @@ dotenv.config();
 const secret = SECRET
 
 export const signin = async (req,res) => {
-    const{ email, password } = req.body;
+    const{ username, password } = req.body;
 
     try {
-        const oldUser = await UserModel.findOne({ email });
+        const oldUser = await UserModel.findOne({ username });
 
         if(!oldUser) {
             return res.status(404).send({message: "User does not exist."});
@@ -27,7 +27,7 @@ export const signin = async (req,res) => {
             return res.status(404).send({message: "Invalid credentials."}); 
         }
 
-        const token = jwt.sign({email: oldUser.email, id: oldUser._id}, secret, {expiresIn: "3h"});
+        const token = jwt.sign({email: oldUser.username, id: oldUser._id}, secret, {expiresIn: "3h"});
 
         res.status(201).json({result:oldUser, token});
 
@@ -43,41 +43,9 @@ export const signup = async (req,res) => {
     const{ username, password, first_name, last_name, postal_code, gender, created_at } = req.body;
     
     try {
-        const oldUser = await UserModel.findOne({ email });
-        if(oldUser) {
-            console.log("email already exists");
-            return res.status(200).send( {message: `${email} already exists.`});
-        }
-
-        const hPassword = await bcrypt.hash(password,12);
-        const result = await UserModel.create({
-            username : username, 
-            password: hPassword, 
-            name : `${first_name} ${last_name}`,
-            first_name : first_name,
-            last_name : last_name,
-            postal_code: postal_code,
-            gender : gender ? gender : null,
-            created_at : created_at ? created_at : new Date(),
-        });
-
-        const token = jwt.sign({email: result.email, id: result._id}, secret, {expiresIn: "3h"});
-
-        res.status(201).json({ result, token});
-    } catch (error) {
-        res.status(500).send({ message: "Unknown error occurred. Please try again."});
-        console.log(error);
-    }
-}
-
-export const initUsers = async (req,res) => {
-    
-    const{ username, password, first_name, last_name, postal_code, gender, created_at } = req;
-    
-    try {
         const oldUser = await UserModel.findOne({ username });
         if(oldUser) {
-            console.log("email already exists");
+            console.log("username already exists");
             return res.status(200).send( {message: `${username} already exists.`});
         }
 
@@ -96,6 +64,36 @@ export const initUsers = async (req,res) => {
         const token = jwt.sign({email: result.username, id: result._id}, secret, {expiresIn: "3h"});
 
         res.status(201).json({ result, token});
+    } catch (error) {
+        res.status(500).send({ message: "Unknown error occurred. Please try again."});
+        console.log(error);
+    }
+}
+
+export const initUsers = async (req,res) => {
+    
+    const{ username, password, first_name, last_name, postal_code, gender, created_at } = req;
+    
+    try {
+        const oldUser = await UserModel.findOne({ username });
+        if(oldUser) {
+            console.log("username already exists");
+            return res.status(200).send( {message: `${username} already exists.`});
+        }
+
+        const hPassword = await bcrypt.hash(password,12);
+        const result = await UserModel.create({
+            username : username, 
+            password: hPassword, 
+            name : `${first_name} ${last_name}`,
+            first_name : first_name,
+            last_name : last_name,
+            postal_code: postal_code,
+            gender : gender ? gender : null,
+            created_at : created_at ? created_at : new Date(),
+        });
+        
+        res.status(201).json({ result });
     } catch (error) {
         res.status(500).send({ message: "Unknown error occurred. Please try again."});
         console.log(error);
