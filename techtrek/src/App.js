@@ -20,11 +20,16 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const fetchProducts = async () => {
-    //var allproductsdata = productsdata;
-    const {data} = await getProducts();
-    console.log(data.products)    
+    
+    // const {data} = await getProducts();
+    // console.log(data.products)    
 
-    setProducts(data.products);
+    // setProducts(data.products);
+
+
+
+    var allproductsdata = productsdata;
+    setProducts(allproductsdata)
   };
 
   const fetchCart = async () => {
