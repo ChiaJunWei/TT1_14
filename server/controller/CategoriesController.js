@@ -17,7 +17,7 @@ export const createCategory = async (req,res) => {
         const catExists = await CategoriesModel.findOne({ name });
         if(catExists) {
             console.log("category already exists");
-            return res.status(200).send( {message: `Category ${name} already exists.`});
+            return res.status(400).send( {message: `Category ${name} already exists.`});
         }
 
         const result = await CategoriesModel.create({

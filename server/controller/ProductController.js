@@ -33,7 +33,7 @@ export const initProducts = async (req,res) => {
         const oldProduct = await ProductModel.findOne({ title });
         if(oldProduct) {
             console.log("product already exists");
-            return res.status(200).send( {message: `${title} already exists.`});
+            return res.status(400).send( {message: `${title} already exists.`});
         }
         const result = await ProductModel.create({
             title : title, 
