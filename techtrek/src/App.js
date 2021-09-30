@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar, Products, Cart, Checkout } from './components';
 import { commerce } from './lib/commerce';
 import productsdata from './Dataset/products.json'
+import axios from 'axios'
+
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -21,10 +23,32 @@ const App = () => {
 
   const fetchCart = async () => {
     setCart(await commerce.cart.retrieve());
+    //http://localhost:5000/order/createorder
   };
 
   const handleAddToCart = async (productId, quantity) => {
     const item = await commerce.cart.add(productId, quantity);
+    console.log(item)
+    var postData = {
+      product_id: "productId",
+      order_id: "1",
+      product_qty:"1",
+      price:'1'
+    };
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    };
+    
+    axios.post('http://localhost:5000/orderitem/createorderitem', postData, axiosConfig)
+    .then((res) => {
+      console.log("RESPONSE RECEIVED: ", res);
+    })
+    .catch((err) => {
+      console.log("AXIOS ERROR: ", err);
+})
 
     setCart(item.cart);
   };
